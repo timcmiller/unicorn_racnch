@@ -1,37 +1,14 @@
 var React = require('react');
+var Unicorn = require('./unicorn.jsx');
 
 module.exports = React.createClass({
 
-  handleUpdateLocation: function(e) {
-    e.preventDefault();
-    //ajax updated location
-
-  },
-
   render: function() {
 
-    var unicorns = [
-      {
-        name: 'brook',
-        id: 1,
-        location: 'barn'
-      },
-      {
-        name: 'tim',
-        id: 2,
-        location: 'pature'
-      }
-    ];
-
-    var unicornNodes = unicorns.map(function(unicorn) {
+    var unicornNodes = this.props.unicorns.map(function(unicorn) {
       return (
 
-        <li key={unicorn.id}>
-          {unicorn.name} is {unicorn.location}
-          <form onSubmit={this.handleUpdateLocation}>
-            <input type="text" name="location" />
-          </form>
-        </li>
+        <Unicorn key={unicorn._id} unicorn={unicorn} {...this.props} />
       );
     }.bind(this));
 

@@ -3,8 +3,13 @@ var app = express();
 var port = process.env.PORT || 4000;
 var unicornRouter = require(__dirname + '/routes/unicorn_routes.js');
 var mongoose = require('mongoose');
+var Unicorn = require(__dirname + '/schema/unicorn.js');
 
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/unicorn_dev');
+Unicorn.find({}, function(err, data) {
+  if(data.length === 0) {require(__dirname + '/lib/populate_database.js');}
+});
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/unicorn_dev');
 
 app.use(express.static(__dirname + '/build/'));
 
